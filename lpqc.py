@@ -17,7 +17,10 @@ def download_audio(page_audio, book):
 
     directory = f'C:\\Users\\{current_user}\\Downloads\\audio_files\\{book}'
  
-
+    # Create a directory to store the downloaded files
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+        
     file_name = page_audio.split('/')[-1]
     file_path = os.path.join(directory, file_name)
     
