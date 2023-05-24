@@ -26,9 +26,7 @@ search_input.send_keys(livre)
 
 def process_data(tbody_element):
     for tbody_element in tbody_elements:
-                
-        if len(tbody_element.text) == 0:
-            break
+
         # Find all the tr elements within the tbody
         tr_elements = tbody_element.find_elements(By.XPATH, "./tr")
 
@@ -54,15 +52,13 @@ while True:
     next_link = driver.find_element(By.ID, "idLivres_next")
 
     # Check if the "Next" link is disabled
-    is_disabled = next_link.get_attribute("disabled") == "true"
-    if is_disabled:
+    tabindex = next_link.get_attribute("tabindex")
+    if tabindex == "-1":
         break
-
     # Click the "Next" link
     next_link.click()
 
-    # Wait for the table to update
-    # WebDriverWait(driver, 10).until(EC.staleness_of(tbody_elements))
+
 
     # Locate the updated table tbody element
     tbody_elements = driver.find_elements(By.XPATH, "//tbody")
@@ -71,10 +67,7 @@ while True:
 
     # Retrieve and process the data from the updated page
     process_data(tbody_elements)
-      # Check if there are more elements in the table
-    # rows = tbody_elements.find_elements(By.TAG_NAME, "tr")
-    # if len(rows) == 0:
-    #     break
+ 
 
 
 
@@ -82,5 +75,3 @@ while True:
 # Fermer le navigateur
 driver.quit()
 
-# Traitez le contenu récupéré selon vos besoins
-# print("tbody: ", tbody_element.text)
