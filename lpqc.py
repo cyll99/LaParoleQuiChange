@@ -21,7 +21,6 @@ def download_audio(page_audio, book):
     file_name = page_audio.split('/')[-1]
     file_path = os.path.join(directory, file_name)
     
-    print(file_path)
 
         # Check if the file already exists
     if os.path.exists(file_path):
